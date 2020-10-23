@@ -1,0 +1,8 @@
+library(dplyr)
+library(ggplot2)
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+q3 <- NEI %>% filter(fips == "24510") %>% group_by(year, type) %>% summarize(total_emission = sum(Emissions))
+png(filename = "plot3.png", width = 960, height = 480, units = "px")
+ggplot(q3, aes(x = year, y = total_emission)) + geom_point(aes(color = year), size = 4) + facet_grid(. ~ type) + labs(x = "year", y = "tones") + ggtitle("Total PM2.5 Emissions of Baltimore City by Type")
+dev.off()

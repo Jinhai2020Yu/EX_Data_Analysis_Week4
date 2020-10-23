@@ -1,0 +1,7 @@
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+BC <- subset(NEI, fips == "24510")
+q2 <- tapply(BC$Emissions, BC$year, sum)
+png(filename = "plot2.png", width = 480, height = 480, units = "px")
+plot(names(q2), q2, xlab = "year", ylab = "tons", main = "Total PM2.5 Emission of Baltimore City", col = "blue", pch = 19)
+dev.off()

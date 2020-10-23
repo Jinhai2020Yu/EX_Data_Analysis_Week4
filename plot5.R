@@ -1,0 +1,8 @@
+library(dplyr)
+library(ggplot2)
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+q5 <- NEI %>% filter(fips == "24510" & type == "ON-ROAD") %>% group_by(year) %>% summarise(total_emission = sum(Emissions))
+png(filename = "plot5.png", width = 480, height = 480, units = "px")
+plot(q5, col = "blue", pch = 19, ylab = "tons", main = "Emssions from Motor Vehicle")
+dev.off()
